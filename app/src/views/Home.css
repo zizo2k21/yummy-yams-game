@@ -1,0 +1,43 @@
+.home-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+.home-container img{
+  width: 200px;
+  height: 200px;
+}
+  
+  .welcome-message {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  .remaining-attempts {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+  
+  .dice-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .play-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .play-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Ajoutez d'autres styles selon vos besoins */
+  

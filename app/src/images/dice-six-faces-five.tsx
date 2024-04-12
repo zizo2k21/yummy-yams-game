@@ -4,8 +4,8 @@ const DiceSixFacesFive = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     style={{
-      height: 512,
-      width: 512,
+      height: 40,
+      width: 40,
     }}
     viewBox="0 0 512 512"
     {...props}

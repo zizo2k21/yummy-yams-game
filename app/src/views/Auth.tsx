@@ -1,18 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../store';
 import axios from 'axios'; // Assurez-vous d'avoir axios installé
+import { useNavigate } from 'react-router-dom'; // Importation du hook useHistory
+import { clearUser } from '../store'; // Importation de l'action clearUser
 
 const Auth: React.FC = () => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // Hook pour la navigation
+
+  // Effacer le state Redux dès que le composant est monté
+  useEffect(() => {
+    dispatch(clearUser());
+  }, [dispatch]); // Ne dépend d'aucune variable, donc vide []
 
   const handleSignup = async () => {
     try {
-      const response = await axios.post('/signup', { email, username, password });
-      dispatch(setUser(response.data));
+      await axios.post('http://localhost:3001/auth/register', { email, username, password });
+      // Rediriger vers la page de connexion après l'inscription réussie
+      navigate('/');
     } catch (error) {
       console.error('Erreur d\'inscription : ', error);
     }
