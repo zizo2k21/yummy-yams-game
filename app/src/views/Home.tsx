@@ -30,6 +30,9 @@ const Home: React.FC = () => {
   };
 
   useEffect(() => {
+    if (user && user.username && user.role === 'admin') {
+      navigate('/results');
+    }
     const storedToken = localStorage.getItem('token');
     if (storedToken) {
       setToken(storedToken);
@@ -38,6 +41,8 @@ const Home: React.FC = () => {
       navigate('/login');
     }
     if (!user.username) navigate('/login');
+
+   
   }, [dispatch, navigate]);
 
   // Déconnexion automatique après 15 minutes d'inactivité

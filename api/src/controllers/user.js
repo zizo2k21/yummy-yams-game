@@ -74,6 +74,7 @@ export const loginUser = async (req, res) => {
         token: token,
         winner: user.winner,
         nbr_games: user.nbr_games,
+        role: user.role
         
     }
     res.status(200).json(userdatas);

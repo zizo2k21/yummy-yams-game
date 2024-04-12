@@ -9,6 +9,7 @@ interface UserState {
   nbr_games: number;
   winner: string[];
 token?: string
+role?: string
 }
 
 const initialState: UserState = {
@@ -17,7 +18,8 @@ const initialState: UserState = {
   password: '',
   nbr_games: 0,
   winner: [],
-  token: ''
+  token: '',
+  role: 'user'
 };
 
 const userSlice = createSlice({

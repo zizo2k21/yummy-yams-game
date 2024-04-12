@@ -16,8 +16,12 @@ const Login: React.FC = () => {
 
   useEffect(() => {
     // Si l'utilisateur est déjà connecté, rediriger vers la page "/home"
-    if (user && user.username) {
+    if (user && user.username && user.role === 'user') {
       navigate('/');
+    }
+
+    if (user && user.username && user.role === 'admin') {
+      navigate('/results');
     }
   }, [user, navigate]);
 
