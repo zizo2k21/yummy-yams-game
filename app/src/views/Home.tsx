@@ -26,7 +26,7 @@ const Home: React.FC = () => {
   const handleLogout = () => {
     localStorage.removeItem('token');
     dispatch(clearUser());
-    navigate('/');
+    navigate('/login');
   };
 
   useEffect(() => {
@@ -35,9 +35,9 @@ const Home: React.FC = () => {
       setToken(storedToken);
       if (user.nbr_games < 3 && user.winner.length === 0) setCanplay(true);
     } else {
-      navigate('/');
+      navigate('/login');
     }
-    if (!user.username) navigate('/');
+    if (!user.username) navigate('/login');
   }, [dispatch, navigate]);
 
   // Déconnexion automatique après 15 minutes d'inactivité
@@ -91,7 +91,7 @@ const Home: React.FC = () => {
   if (!canplay || user.winner.length > 0) {
     return (
       <div className="home-container">
-        <h2>Accueil</h2>
+        <h2>YUMS YAMS</h2>
         <button className="logout-button" onClick={handleLogout}>Déconnexion</button>
         <p className="welcome-message">{message ? message : `Bienvenue sur yums-yams, ${user.username} !`}</p>
         <div className="dice-container">
@@ -109,7 +109,7 @@ const Home: React.FC = () => {
   } else {
     return (
       <div className="home-container">
-        <h2>Accueil</h2>
+        <h2>YUMS YAMS</h2>
         <button className="logout-button" onClick={handleLogout}>Déconnexion</button>
         <p className="welcome-message">{message ? message : `Bienvenue sur yums-yams, ${user.username} !`}</p>
         <p className="remaining-attempts">Tentatives restantes : {3 - user.nbr_games}</p>

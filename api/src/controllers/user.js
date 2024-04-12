@@ -7,7 +7,7 @@ export const createUser = async (req, res) => {
     const { email, username, password } = req.body;
 
     if (!email || !username || !password) {
-        return res.status(400).json({ message: "All fields are required" });
+        return res.status(400).json({ message: "Tous les champs sont obligatoires" });
     }
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hashSync(password, salt);
@@ -22,7 +22,7 @@ export const createUser = async (req, res) => {
             { user_id: user._id, email },
             process.env.TOKEN_KEY || "TOKEN_KEY",
             {
-                expiresIn: "2h",
+                expiresIn: "1h",
             }
         );
         user.token = token;
@@ -38,6 +38,9 @@ export const createUser = async (req, res) => {
         console.log(user);
         res.status(201).json(userdatas);
     } catch (error) {
+        if(error.code === 11000) {
+            return res.status(400).json({ message: "Cet utilisateur existe déja veillez changer l'emaill et le username" });
+        }
         res.status(400).json({ message: error.message });
     }
 };
@@ -45,21 +48,21 @@ export const createUser = async (req, res) => {
 export const loginUser = async (req, res) => {
     const { username, password } = req.body;
     if (!username || !password) {
-        return res.status(400).json({ message: "All fields are required" });
+        return res.status(400).json({ message: "Tous les champs sont obligatoires" });
     }
     const user = await User.findOne({ username });
     if (!user) {
-        return res.status(400).json({ message: "User does not exist" });
+        return res.status(400).json({ message: "username ou mot de passe incorrect" });
     }
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-        return res.status(400).json({ message: "Invalid credentials" });
+        return res.status(400).json({ message: "username ou mot de passe incorrect" });
     }
     const token = jsonwebtoken.sign(
         { user_id: user._id, email: user.email },
         process.env.TOKEN_KEY || "TOKEN_KEY",
         {
-            expiresIn: "2h",
+            expiresIn: "1h",
         }
     );
     user.token = token;
