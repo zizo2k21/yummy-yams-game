@@ -20,6 +20,7 @@ const Home: React.FC = () => {
   const [token, setToken] = useState('');
   const [message, setMessage] = useState('');
   const [dice, setDice] = useState([]);
+  const [available, setAvailable] = useState(true);
   const [winner, setWinner] = useState([{}]);
 
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const Home: React.FC = () => {
     navigate('/login');
   };
 
-  useEffect(() => {
+useEffect(() => {
     if (user && user.username && user.role === 'admin') {
       navigate('/results');
     }
@@ -41,6 +42,15 @@ const Home: React.FC = () => {
       navigate('/login');
     }
     if (!user.username) navigate('/login');
+
+    const checkPastries = async () => {
+      const response = await axios.get('http://localhost:3001/check');
+      setAvailable(response.data.available);
+      
+  };
+
+    checkPastries();
+    
 
    
   }, [dispatch, navigate]);
@@ -88,7 +98,17 @@ const Home: React.FC = () => {
     }
   };
 
-
+  if(!available && user.winner.length === 0 && user.nbr_games < 3){
+    return (
+      <div className="home-container">
+      {/* <p className="welcome-message">{message ? message : ``}</p> */}
+      <div className="home-block">
+      <p className='text-win'>Malheuresement Il n'y a plus de patisseries à gagner ! </p>
+        <button className="results-button" onClick={() => navigate('/results')}>Aller aux resultats</button>
+      </div>
+    </div>
+    )
+  }
   if (!user) {
     return null;
   }
@@ -96,33 +116,42 @@ const Home: React.FC = () => {
   if (!canplay || user.winner.length > 0) {
     return (
       <div className="home-container">
-        <h2>YUMS YAMS</h2>
-        <button className="logout-button" onClick={handleLogout}>Déconnexion</button>
-        <p className="welcome-message">{message ? message : `Bienvenue sur yums-yams, ${user.username} !`}</p>
+        {/* <p className="welcome-message">{message ? message : ``}</p> */}
+        <div className="home-block">
         <div className="dice-container">
-          {dice &&
+          {dice && 
             dice.map((value, index) => <DiceImage key={index} value={value} />)}
         </div>
-        <p>Votre partie est terminée</p>
-        <p>{user.winner.length > 0 ? `Vous avez gagné ! ${user.winner.length} patisseries` : 'Vous avez perdu !'}</p>
+        {user.winner.length > 0 && <p className='congrats-text'>Bravo, {user.username} !</p>}
+        <p className='text-win'>{user.winner.length > 0 ? `Vous avez gagné ${user.winner.length} patisserie(s) !` : 'Votre partie est terminée, vous n\'avez pas gagné de patisseries cette fois ci'}</p>
+        <div className='image-container'>
         {user.winner.length > 0 &&
           user.winner.map((pastry: any, index) => (
-            <img key={index} src={`http://localhost:3001/images/${pastry.image}`} alt={pastry.name} />
+             <div className='imgs'><img key={index} src={`http://localhost:3001/images/${pastry.image}`} alt={pastry.name} /><p>{pastry.name}</p></div>
           ))}
+          </div>
+          <button className="results-button" onClick={() => navigate('/results')}>Voir les resultats</button>
+        </div>
       </div>
     );
   } else {
     return (
       <div className="home-container">
-        <h2>YUMS YAMS</h2>
-        <button className="logout-button" onClick={handleLogout}>Déconnexion</button>
-        <p className="welcome-message">{message ? message : `Bienvenue sur yums-yams, ${user.username} !`}</p>
-        <p className="remaining-attempts">Tentatives restantes : {3 - user.nbr_games}</p>
-        <div className="dice-container">
-          {dice &&
-            dice.map((value, index) => <DiceImage key={index} value={value} />)}
-        </div>
-        <button className="play-button" onClick={handlePlay}>Jouer</button>
+        <p className="welcome-message">{message ? message : `Bienvenue sur yummy-yams, ${user.username} !`}</p>
+        <div className="home-block">
+          <p className="remaining-attempts">Tentatives restantes : {3 - user.nbr_games}</p>
+          <div className="dice-container">
+            {dice &&
+              dice.map((value, index) => <DiceImage key={index} value={value} />)}
+          </div>
+          {user.winner.length === 0 && user.nbr_games < 3 && <button className="play-button" onClick={handlePlay}>Lancer les dés</button>}
+          {user.nbr_games == 3 && 
+          <>
+          <p className='text-win'>Votre partie est terminée</p>
+          <button className="results-button" onClick={() => navigate('/results')}>Voir les resultats</button>
+          </>
+          }
+      </div>
       </div>
     );
   }

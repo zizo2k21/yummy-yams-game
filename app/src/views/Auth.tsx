@@ -34,14 +34,14 @@ const Auth: React.FC = () => {
   };
 
   return (
-    <div className='login-container'>
+    <><h1 className='title-game'>YUMMY YAM'S</h1><div className='login-container'></div><div className='login-container'>
       <h2>Inscription</h2>
       <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
       <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Nom d'utilisateur" />
       <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Mot de passe" />
       <button onClick={handleSignup}>S'inscrire</button>
       {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Afficher le message d'erreur s'il existe */}
-    </div>
+    </div></>
   );
 };
 

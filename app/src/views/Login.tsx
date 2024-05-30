@@ -46,15 +46,17 @@ const Login: React.FC = () => {
   };
 
   return (
+    <>
+    <h1 className='title-game'>YUMMY YAM'S</h1>
     <div className='login-container'>
       <h2>Connexion</h2>
       <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Nom d'utilisateur" />
       <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Mot de passe" />
-      <button onClick={handleLogin}>Se connecter</button>
+      <button className='login-button' onClick={handleLogin}>Se connecter</button>
       {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Afficher le message d'erreur s'il existe */}
       <p>Vous n'avez pas de compte ?</p>
-      <button onClick={handleRegisterRedirect}>Créer un compte</button> {/* Bouton pour rediriger vers la page d'inscription */}
-    </div>
+      <button className='register-button' onClick={handleRegisterRedirect}>Créer un compte</button> {/* Bouton pour rediriger vers la page d'inscription */}
+    </div></>
   );
 };
 

@@ -69,7 +69,7 @@ export const playGame = async (req, res) => {
         //attribuer 1 pastries
         const userdata = await attribuatePastries(user,1, 'DOUBLE')
         if(userdata){
-            return res.status(200).json({message:"Congratulations !", user: userdata, dice_table: dice_table})
+            return res.status(200).json({message:"Congratulations !", user: userdata, dice_table: dice_table, type:'DOUBLE'})
         }
     }
     await user.save()
@@ -86,6 +86,10 @@ export const playGame = async (req, res) => {
     })
     
 
+}
+
+const checkAvalaiblePAstries =()=>{
+    
 }
 
 const detectForOfFive = (dice)=>{
@@ -124,7 +128,7 @@ const attribuatePastries = async(user,limit,type) => {
         let data_winner = {
             name: pastry.name,
             image: pastry.image,
-            date : new Date().toLocaleDateString()
+            date : new Date().toLocaleDateString('fr-FR')
         };
         winnerData.push(data_winner);
         await Pastry.findOneAndUpdate({ _id: pastry._id }, { $inc: { stock: -1, quantityWon: 1 } });

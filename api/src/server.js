@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import AuthRouter from "./routers/auth.js";
 import gameRouter from "./routers/game.js";
 import AdminRouter from "./routers/admin.js";
+import checkRouter from "./routers/check.js";
 import path from 'node:path'
 import {fileURLToPath} from 'node:url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -25,6 +26,8 @@ app.use('/auth', AuthRouter);
 app.use('/game', gameRouter);
 
 app.use('/admin', AdminRouter);
+
+app.use('/check', checkRouter);
 
 
 

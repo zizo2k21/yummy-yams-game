@@ -5,9 +5,9 @@ export const getResults = async (req, res) => {
     const userStored = req.user
     const user = await User.findOne({ email: userStored.email });
 
-    if(user.role !== 'admin'){
-        return res.status(401).json({ message: "Unauthorized" });
-    }
+    // if(user.role !== 'admin'){
+    //     return res.status(401).json({ message: "Unauthorized" });
+    // }
 
     //recuperer tous les users qui on un tableau winner non vide
     const usersWithWinner = await User.find({ winner: { $ne: [] } });

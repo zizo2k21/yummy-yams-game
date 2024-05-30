@@ -1,10 +1,13 @@
 .results-container {
-    margin: 20px;
+    margin-top:15vh;
+    max-width: 800px;
+    margin-inline: auto;
   }
   
   .results-header {
     font-size: 24px;
     margin-bottom: 20px;
+    text-align: center;
   }
   
   .logout-button {
@@ -20,6 +23,7 @@
   .results-table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 50px;
   }
   
   .results-table th,
@@ -27,6 +31,7 @@
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
+    background: #fff;
   }
   
   .results-table th {

@@ -1,0 +1,16 @@
+.header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 800px;
+    height: auto;
+    margin-inline: auto;
+    padding-top: 30px;
+    pointer-events: all;
+  }
+  .header-logo{
+    font-size: 35px;
+    font-family: 'Satisfy';
+    color: #8C7108;
+  }

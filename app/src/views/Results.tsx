@@ -27,9 +27,9 @@ const Results: React.FC = () => {
   const user = useSelector((state: any) => state.user);
 
   useEffect(() => {
-    if (user && user.role !== 'admin') {
-      navigate('/');
-    } else {
+    // if (user && user.role !== 'admin') {
+    //   navigate('/');
+    // } else {
       const fetchResults = async () => {
         try {
           const token = localStorage.getItem('token');
@@ -49,7 +49,7 @@ const Results: React.FC = () => {
       };
   
       fetchResults();
-    }
+    // }
   }, [user, navigate, dispatch]);
 
   const handleLogout = () => {
@@ -60,8 +60,7 @@ const Results: React.FC = () => {
 
   return (
     <div className="results-container">
-      <h2 className="results-header">Résultats des gagnants</h2>
-      <button className="logout-button" onClick={handleLogout}>Se déconnecter</button>
+      <h2 className="results-header">Liste des gagnants</h2>
       <table className="results-table">
         <thead>
           <tr>
@@ -84,6 +83,7 @@ const Results: React.FC = () => {
               <td>
                 <ul className="results-list">
                   {user.winner.map((winner, index) => (
+                    //ecrire la date dans l'ordre jj-mm-aaaa
                     <li key={index}>{winner.date}</li>
                   ))}
                 </ul>
@@ -92,6 +92,7 @@ const Results: React.FC = () => {
           ))}
         </tbody>
       </table>
+      <button className="results-button" onClick={() => navigate('/')}>Retour</button>
     </div>
   );
 };

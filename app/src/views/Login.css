@@ -1,23 +1,28 @@
 
 
+.title-game{
+    font-size: 90px;
+    color: #8C7108;
+    font-family:'Satisfy';
+    text-align: center;
+    margin-top: 30px;
+}
 .login-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
+    /* justify-content: center; */
+    /* height: 100vh; */
     max-width: 400px;
-    margin: 0 auto;
+    margin: 40px auto;
     padding: 20px;
     text-align: center;
 }
 
-/* .login-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-} */
+.login-container h2{
+    margin-bottom: 20px;
+}
+
 
 .login-container input{
     display: block;
@@ -36,7 +41,16 @@
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
-    margin-right: 20px;
+}
+.login-container p{
+    font-size: 16px;
+}
+.login-button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.register-button {
+    margin-top: 10px;
 }
 
 .login-container button:hover{
